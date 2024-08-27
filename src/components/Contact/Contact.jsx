@@ -1,5 +1,4 @@
 import { FaUserLarge, FaPhone } from "react-icons/fa6";
-import clsx from "clsx";
 import css from "./Contact.module.css";
 
 const Contact = ({ contact, onDeleteContact }) => {

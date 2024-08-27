@@ -2,6 +2,9 @@ import { ErrorMessage, Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 import css from "./ContactForm.module.css";
+import { addContact } from "../../redux/contactsSlice";
+import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
 
 const INITIAL_VALUES = {
   userName: "",
@@ -20,7 +23,18 @@ const ProfileValidationSchema = Yup.object().shape({
     .required("Number is required"),
 });
 
-const ContactForm = ({ onAddUserContact }) => {
+const ContactForm = () => {
+
+  const dispatch = useDispatch()
+
+    const onAddUserContact = (newContact) => {
+      const finalyContact = {
+        ...newContact,
+        id: nanoid(),
+      };
+
+      dispatch(addContact(finalyContact));
+    };
   const handleSubmit = (values, actions) => {
     const contactObject = {
       name: values.userName,
